@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/search', function () {
-        return view('search');
-    })->name('search');
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
     
 });
 
