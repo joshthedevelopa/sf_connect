@@ -17,7 +17,7 @@
         <!-- Filter section, show/hide based on section state. -->
         <div class="pt-6" id="filter-section-mobile-0">
             <div class="space-y-6">
-                <input id="keyword" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md block mt-1 w-full" type="text" name="keyword" placeholder="Enter in search words..."/>
+                <input value="{{ ($input['keywords'] ?? '') }}" id="keywords" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md block mt-1 w-full" type="text" name="keywords" placeholder="Enter in search words..."/>
             </div>
         </div>
     </div>
@@ -35,9 +35,9 @@
             <div class="space-y-6">
                 @foreach($types as $type)
                 <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="type[]" value="{{ $type }}" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">{{ $type }}</label>
+                    <input id="types" name="types[]" value="{{ $type }}" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" @checked(in_array($type, $input['types'] ?? []))>
+                    <label for="types" class="ml-3 min-w-0 flex-1 text-gray-500">{{ $type }}</label>
                 </div>
                 @endforeach
             </div>
@@ -57,9 +57,9 @@
             <div class="space-y-6">
                 @foreach($regions as $region)
                 <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="regions[]" value="{{ $region }}" type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">{{ $region }}</label>
+                    <input id="regions" name="regions[]" value="{{ $region }}" type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer" @checked(in_array($region, $input['regions'] ?? []))>
+                    <label for="regions" class="ml-3 min-w-0 flex-1 text-gray-500">{{ $region }}</label>
                 </div>
                 @endforeach
             </div>

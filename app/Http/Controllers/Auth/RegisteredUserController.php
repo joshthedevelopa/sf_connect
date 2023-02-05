@@ -15,12 +15,22 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    public array $data;
+
+    public function __construct()
+    {
+        $this->data = [
+            "types" => User::$type_list,
+            "regions" =>  User::$region_list
+        ];
+    }
+
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register', $this->data);
     }
 
     /**
@@ -32,6 +42,8 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string'],
+            'region' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -39,6 +51,8 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'region' => $request->region,
+            'type' => $request->type,
             'password' => Hash::make($request->password),
         ]);
 

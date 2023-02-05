@@ -21,6 +21,32 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'description'
+    ];
+
+    static public array $region_list = [
+        "Greater Accra",
+        "Central",
+        "Ashanti",
+        "Eastern",
+        "Western",
+        "Western North",
+        "Volta",
+        "Upper West",
+        "Upper East",
+        "North East",
+        "Oti",
+        "Bono East",
+        "Ahafo",
+        "Northern",
+        "Savannah",
+        "Brong Ahafo",
+    ];
+
+    static public array $type_list = [
+        "Donor and Embassy",
+        "NGO",
+        "Projectcommunities and Schools",
     ];
 
     /**
@@ -28,9 +54,18 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
+    // protected $hidden = [
+    //     'password',
+    //     'remember_token',
+    // ];
+
+    protected $visible = [
+        'id',
+        'name',
+        'type',
+        'region',
+        'description',
+        'date_created',
     ];
 
     /**

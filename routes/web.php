@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OrganizationController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +26,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
-    
+    Route::controller(OrganizationController::class)->group(function () {
+        Route::get('/search', 'search')->name('search');
+        Route::post('/search', 'results')->name('results');
+        Route::get('/search/{id}', 'show')->name('show');
+    });
 });
 
 Route::middleware('auth')->group(function () {
